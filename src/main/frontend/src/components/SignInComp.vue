@@ -15,7 +15,7 @@ const email = ref(""),
   password = ref(""),
   passwordRules = reactive([
     (v) => !!v || "Es necesario introducir una contraseña",
-    (v) => v.length >= 8 || "Introduzca un e-mail válido",
+    (v) => v.length >= 8 || "La contraseña debe tener al menos 8 caracteres",
   ]),
   confirmPassword = ref(""),
   confirmPasswordRules = reactive([

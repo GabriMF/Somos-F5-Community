@@ -7,7 +7,7 @@ import CardUsers from '../components/CardUsers.vue';
 <main>
     <Header/>
     <UserContacts/>
-    <CardUsers/>
+    <!-- <CardUsers/> -->
 </main>
 </template>
 <style lang="scss">
