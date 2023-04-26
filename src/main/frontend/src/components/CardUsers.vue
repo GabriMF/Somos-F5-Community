@@ -1,14 +1,26 @@
 <script setup>
+import { useAuthStore } from "../stores/AuthStore";
 import axios from "axios";
+
 let random = Math.round(Math.random() * 2 + 1);
 let image = "src/assets/images/separator" + random + ".png";
-
-
 
 const props = defineProps({
   user: Object,
   profile: Array,
 });
+
+const profileDescription = () => {
+  router.push(`username/${props.user.username}`);
+};
+
+// const deleteUser = () => {
+
+
+// }
+
+
+
 </script>
 
 <template>
@@ -21,7 +33,7 @@ const props = defineProps({
       <img
         class="img-u"
         v-if="user.image != null"
-        :src="'http://localhost:8080/media/' + user.image" alt=""
+        :src="'http://localhost:8080/media/' + user.image"
       />
       <img
         v-else
@@ -35,7 +47,7 @@ const props = defineProps({
         </h1>
         <div class="contact-u">
           <i class="fa-regular fa-envelope logo-u" style="color: #000000"></i>
-          <p class="text-u">{{ user.username }}</p>
+          <p @click="profileDescription" class="text-u">{{ user.username }}</p>
         </div>
         <div class="contact-u">
           <i class="fa-solid fa-location-dot" style="color: #000000"></i>
@@ -43,10 +55,12 @@ const props = defineProps({
         </div>
       </div>
     </div>
-    <!-- <button>
-        <i class="fa-regular fa-trash-can fa-2xl trash-u" style="color: #000000;"></i>
-    </button>  -->
-    <button @click="deleteUser" class="btn-u">ELIMINAR DE MIS CONTACTOS</button>
+    <button class="btn-u">
+      <i
+        class="fa-regular fa-trash-can fa-2xl trash-u"
+        style="color: #ffffff"
+      ></i>
+    </button>
   </section>
 
   <div class="separator-u" id="separator">
@@ -57,7 +71,6 @@ const props = defineProps({
     />
   </div>
 </template>
-
 <style lang="scss">
 @use "@/scss/colors" as c;
 @use "@/scss/fonts";
@@ -109,20 +122,26 @@ const props = defineProps({
   }
 
   .btn-u {
-    background-color: map-get(c.$colors, "dark-red");
+    background-color: map-get(c.$colors, "orange");
     color: map-get(c.$colors, "white");
     font-family: "Open Sans", sans-serif;
     font-size: 60%;
-    width: 22%;
-    height: 90%;
+    width: 5%;
     border: solid;
     box-sizing: border-box;
-    border-radius: 50px;
+    border-radius: 100%;
     margin: 1%;
+
     &:hover {
-      background-color: map-get(c.$colors, "white");
+      background-color: map-get(c.$colors, "green");
       color: map-get(c.$colors, "orange");
     }
+   
+    .trash-u{
+      margin-bottom: 1vh;
+
+    }
+
   }
 }
 

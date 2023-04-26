@@ -14,6 +14,7 @@ const descriptionModel = ref()
 const post = reactive({
   title: titleModel,
   description: descriptionModel,
+  // url:urlModel,
 })
 const submitData = async () => {
   try {
@@ -60,6 +61,8 @@ const reload = () =>{
       <textarea v-model="descriptionModel" class="description" placeholder="Cuéntanos algo interesante..." rows="5"
         cols="46">
       </textarea>
+      <!-- <input v-model="urlModel" class="title" type="url" pattern="https://.*" placeholder="Añade el link.." /> -->
+
       <input class="resources" type="file" @change="onFileChange" ref="fileInput">
       <div class="buttonsContainer">
         <button @click="reload" class="cancelButton">Cancelar</button>

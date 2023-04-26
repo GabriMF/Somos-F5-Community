@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
 import { defineProps, onBeforeMount, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 let random = Math.round(Math.random() * 2 + 1);
 // let image = "src/assets/images/separator" + random + ".png";
@@ -44,14 +45,10 @@ onBeforeMount(() => {
     withCredentials: true,
   })
     .then((response) => {
-      profiles.value = response.data;
+      profiles.value = response.data.name + response.data.surname;
       console.log(profiles.value);
     })
-    .catch((e) => {
-      console.log(e);
-      console.log(props.post.idProfile);
-      console.log("Catch error profiles");
-    });
+    .catch((e) => {});
 });
 
 const props = defineProps({
@@ -69,6 +66,13 @@ const deletePost = () => {
 };
 
 const dialog = ref(false);
+
+const router = useRouter();
+
+const profileDescription = () => {
+  router.push(`username/${props.post.idProfile}`);
+  console.log("hello");
+};
 </script>
 
 <template>
@@ -84,8 +88,8 @@ const dialog = ref(false);
               backorange: random === 3,
             }"
           >
-            <h3 class="userNamePost">
-              {{ profiles.name + " " + profiles.surname }}
+            <h3 @click="profileDescription" class="userNamePost">
+              {{ profiles }}
             </h3>
           </div>
           <p class="date">{{ date }}</p>
@@ -104,6 +108,7 @@ const dialog = ref(false);
             <p class="textPubli">
               {{ post.description }}
             </p>
+           
           </div>
           <img
             class="filePubli"
@@ -116,7 +121,10 @@ const dialog = ref(false);
           <v-row class="mr-1" justify="end">
             <v-dialog class="popUp" v-model="dialog">
               <template v-slot:activator="{ props }">
-                <v-btn class="verMasButton" variant="text" v-bind="props">
+                <v-btn :class="{
+                    verMasButton: $route.path != '/ElMuro',
+                    verMasButtonElMuroView: $route.path == '/ElMuro',
+                  }" variant="text" v-bind="props">
                   Ver más
                 </v-btn>
               </template>
@@ -169,10 +177,7 @@ const dialog = ref(false);
               </v-card>
             </v-dialog>
           </v-row>
-          <!-- <button class="button-edit">
-						<i class="fa-solid fa-pen btn btn-edit"></i>
-					</button> -->
-          <button class="button-delete">
+          <button v-if="$route.path !='/ElMuro'" class="button-delete">
             <i @click="deletePost" class="fa-solid fa-trash btn btn-delete"></i>
           </button>
         </div>
@@ -199,6 +204,12 @@ const dialog = ref(false);
   background-size: contain;
   width: 40vw;
   height: 5vh;
+
+  &:hover {
+    background-image: url("../assets/images/UserNamePostBackground/background1.png");
+    cursor: pointer;
+    opacity: 0.7;
+  }
 }
 
 .orange {
@@ -215,6 +226,12 @@ const dialog = ref(false);
   background-size: contain;
   width: 40vw;
   height: 5vh;
+
+  &:hover {
+    background-image: url("../assets/images/UserNamePostBackground/background3.png");
+    cursor: pointer;
+    opacity: 0.7;
+  }
 }
 
 .purple {
@@ -231,6 +248,12 @@ const dialog = ref(false);
   background-size: contain;
   width: 40vw;
   height: 5vh;
+
+  &:hover {
+    background-image: url("../assets/images/UserNamePostBackground/background2.png");
+    cursor: pointer;
+    opacity: 0.7;
+  }
 }
 
 .cards {
@@ -354,6 +377,21 @@ const dialog = ref(false);
       border-radius: 5px;
     }
   }
+
+  .verMasButtonElMuroView {
+      margin-top: 2.5vh;
+      width: 10vw;
+
+      &:hover {
+        background-color: map-get(c.$colors, "light-purple");
+        border-radius: 5px;
+      }
+
+      &:active {
+        background-color: purple;
+        border-radius: 5px;
+      }
+    }
 
   .button-edit {
     margin: 0.3em;

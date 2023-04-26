@@ -2,6 +2,9 @@
 import { ref, reactive } from "vue";
 import AuthService from "../services/AuthService";
 import { useRouter } from "vue-router";
+import { useProgrammatic } from '@oruga-ui/oruga-next'
+	
+const { oruga } = useProgrammatic()
 
 let checkCodeVar = "F51234";
 
@@ -30,7 +33,12 @@ const submitData = async () => {
     if (email.value && password.value != null) {
         try {
         const response = await authService.register(email.value, password.value);
-        alert("Registrado con éxito");
+        oruga.notification.open({
+      message: 'Enhorabuena! a partir de ahora ya formas parte de Somos f5',
+      rootClass: 'success-notification',
+      duration: 7000,
+      position: 'top'
+    });
         router.push("/");
     } catch (error) {
       console.error(error);
@@ -68,7 +76,7 @@ const submitData = async () => {
         >
         </v-text-field>
 
-                <v-text-field v-model="checkCode" :rules="checkCodeRules" label="Codigo de verificacion" required>
+                <v-text-field v-model="checkCode" :rules="checkCodeRules" label="Código de verificación" required>
                 </v-text-field>
 
                 <div class="d-flex flex-column">

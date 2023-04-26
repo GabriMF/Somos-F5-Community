@@ -2,6 +2,7 @@
 	import { ref, onBeforeMount } from "vue";
 import HeaderAdmin from '../components/HeaderAdmin.vue';
 import BannerAdmin from '../components/BannerAdmin.vue';
+
 import UserService from "../services/UserService";
 import CardUsers from "../components/CardUsers.vue";
 import ProfileService from "../services/ProfileService";
@@ -9,14 +10,14 @@ import ProfileService from "../services/ProfileService";
 const userService = new UserService();
 const profileService = new ProfileService();
 	let users = ref([]);
-	let user = ref("");
+	// let user = ref("");
 	let profile = ref([]);
  	onBeforeMount(async()=>{
 	await userService.fetchAllUsers()
 	// user = userService.getUser();
 	await profileService.fetchAllProfiles()
 	profile.value = profileService.getProfile();
-	users.value = userService.getUser()
+	users.value = userService.getUsers()
 	console.log( users);
 	console.log( profile.value);
 	});
@@ -26,9 +27,10 @@ const profileService = new ProfileService();
 <main>
 <HeaderAdmin/>
 <BannerAdmin/>
-<Search/>
+
 <CardUsers
 		v-for= "user in users" :user="user" :profile="profile" />
+    <!-- falta buscador -->
 </main>
 </template>
 
