@@ -2,6 +2,7 @@
 	import { ref, onBeforeMount } from "vue";
 import HeaderAdmin from '../components/HeaderAdmin.vue';
 import BannerAdmin from '../components/BannerAdmin.vue';
+
 import UserService from "../services/UserService";
 import CardUsers from "../components/CardUsers.vue";
 import ProfileService from "../services/ProfileService";
@@ -26,9 +27,10 @@ const profileService = new ProfileService();
 <main>
 <HeaderAdmin/>
 <BannerAdmin/>
-<Search/>
+
 <CardUsers
 		v-for= "user in users" :user="user" :profile="profile" />
+    <!-- falta buscador -->
 </main>
 </template>
 

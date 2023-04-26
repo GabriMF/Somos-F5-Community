@@ -1,18 +1,24 @@
 <script setup>
-import { useAuthStore } from '../stores/AuthStore';
-    import axios from 'axios';
+import { useAuthStore } from "../stores/AuthStore";
+import axios from "axios";
 
-    let random = Math.round(Math.random()*2+1);
-    let image = "src/assets/images/separator" + random + ".png";
-  
-    const props = defineProps({
-		user: Object,
-        profile:Array,
-	})
+let random = Math.round(Math.random() * 2 + 1);
+let image = "src/assets/images/separator" + random + ".png";
 
-    const profileDescription = () => {
-            router.push(`username/${props.user.username}`)
-    }
+const props = defineProps({
+  user: Object,
+  profile: Array,
+});
+
+const profileDescription = () => {
+  router.push(`username/${props.user.username}`);
+};
+
+// const deleteUser = () => {
+
+
+// }
+
 
 
 </script>
@@ -24,20 +30,24 @@ import { useAuthStore } from '../stores/AuthStore';
   >
     <!-- <section v-if="random==3" class="card-u" style="background-color: orange;"> -->
     <div class="info-u">
-        <img class="img-u" 
-        v-if="user.image != null" :src="'http://localhost:8080/media/' + user.image">
-        <img
-        v-else class="img-u" src="../assets/images/perfilVacio.png" alt="img"/>
-        <div class="date-u">
-           <h1 class="name-u">{{ profile[user.id -1].name + profile[user.id -1].surname }}</h1>
-           <div class="contact-u">
-                <i class="fa-regular fa-envelope logo-u" style="color: #000000;"></i>
-                <p @click="profileDescription" class="text-u">{{ user.username }}</p>
-           </div>
-           <div class="contact-u">
-                <i class="fa-solid fa-location-dot" style="color: #000000;"></i>
-                <p class="text-u">{{ profile[user.id -1].location }}</p>
-           </div>
+      <img
+        class="img-u"
+        v-if="user.image != null"
+        :src="'http://localhost:8080/media/' + user.image"
+      />
+      <img
+        v-else
+        class="img-u"
+        src="../assets/images/perfilVacio.png"
+        alt="img"
+      />
+      <div class="date-u">
+        <h1 class="name-u">
+          {{ profile[user.id - 1].name + profile[user.id - 1].surname }}
+        </h1>
+        <div class="contact-u">
+          <i class="fa-regular fa-envelope logo-u" style="color: #000000"></i>
+          <p @click="profileDescription" class="text-u">{{ user.username }}</p>
         </div>
         <div class="contact-u">
           <i class="fa-solid fa-location-dot" style="color: #000000"></i>
@@ -45,13 +55,13 @@ import { useAuthStore } from '../stores/AuthStore';
         </div>
       </div>
     </div>
-    <!-- <button v-if="auth.role === 'ROLE_ADMIN'"> 
-        <i class="fa-regular fa-trash-can fa-2xl trash-u" style="color: #000000;"></i>
-    </button>  -->
-    <button @click="deleteUser" class="btn-u" >ELIMINAR DE MIS CONTACTOS</button>
- </section>
-
-
+    <button class="btn-u">
+      <i
+        class="fa-regular fa-trash-can fa-2xl trash-u"
+        style="color: #ffffff"
+      ></i>
+    </button>
+  </section>
 
   <div class="separator-u" id="separator">
     <img
@@ -61,7 +71,6 @@ import { useAuthStore } from '../stores/AuthStore';
     />
   </div>
 </template>
-
 <style lang="scss">
 @use "@/scss/colors" as c;
 @use "@/scss/fonts";
@@ -113,20 +122,26 @@ import { useAuthStore } from '../stores/AuthStore';
   }
 
   .btn-u {
-    background-color: map-get(c.$colors, "dark-red");
+    background-color: map-get(c.$colors, "orange");
     color: map-get(c.$colors, "white");
     font-family: "Open Sans", sans-serif;
     font-size: 60%;
-    width: 22%;
-    height: 90%;
+    width: 5%;
     border: solid;
     box-sizing: border-box;
-    border-radius: 50px;
+    border-radius: 100%;
     margin: 1%;
+
     &:hover {
-      background-color: map-get(c.$colors, "white");
+      background-color: map-get(c.$colors, "green");
       color: map-get(c.$colors, "orange");
     }
+   
+    .trash-u{
+      margin-bottom: 1vh;
+
+    }
+
   }
 }
 

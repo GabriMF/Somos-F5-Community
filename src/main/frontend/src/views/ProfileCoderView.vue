@@ -39,7 +39,7 @@
 			:user="user"
 		/>
 		<div class="titleView">
-			<h1 class="titleText">Todas las publicaciones</h1>
+			<!-- <h1 class="titleText">Todas las publicaciones</h1> -->
 			{{ user.value }}
 		</div>
 	</main>

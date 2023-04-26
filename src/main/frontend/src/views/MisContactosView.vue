@@ -1,10 +1,12 @@
 <script setup>
+import { ref, onBeforeMount } from "vue";
+import Header from "../components/Header.vue";
+import UserContacts from "../components/UserContacts.vue";
+import CardUsers from "../components/CardUsers.vue";
+import UserService from "../services/UserService";
+import ProfileService from "../services/ProfileService";
 
-import Header from '../components/Header.vue';
-import UserContacts from '../components/UserContacts.vue';
-import CardUsers from '../components/CardUsers.vue';
-import { ref, onBeforeMount } from 'vue';
-import UserService from '../services/UserService';
+
 
 const service = new UserService(); 
 
@@ -28,18 +30,12 @@ const service = new UserService();
 			
   })
 
-import { ref, onBeforeMount } from "vue";
-import Header from "../components/Header.vue";
-import UserContacts from "../components/UserContacts.vue";
-import CardUsers from "../components/CardUsers.vue";
-import UserService from "../services/UserService";
-import ProfileService from "../services/ProfileService";
 
 const userService = new UserService();
 const profileService = new ProfileService();
 let users = ref([]);
-let user = ref("");
-let profile = ref([]);
+// let user = ref("");
+// let profile = ref([]);
 onBeforeMount(async () => {
   await userService.fetchAllUsers();
   // user = userService.getUser();
@@ -62,11 +58,10 @@ onBeforeMount(async () => {
 
   <main>
     <Header />
-    <CardUsers
-    :user = "user" :profile = "profile"/>
-
     <UserContacts />
-    <CardUsers v-for="user in users" :user="user" :profile="profile" />
+    <CardUsers :user = "user" :profile = "profile"/>
+
+    <!-- <CardUsers v-for="user in users" :user="user" :profile="profile" /> -->
   </main>
 
 </template>
